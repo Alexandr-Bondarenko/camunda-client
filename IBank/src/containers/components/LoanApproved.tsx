@@ -22,10 +22,13 @@ export const LoanApproved = () => {
             <Container>
                 <Segment placeholder color='blue' secondary >
                     <Segment size='massive' color='blue' secondary>
-                        Информация о клиенте
+                        Поздравляем!!!
                 </Segment>
                     <Grid>
                         <GridRow columns='3'>
+                            <GridColumn floated='left'>
+                                <h2>Пацан к успеху пришел!</h2>
+                            </GridColumn>
                             <GridColumn floated='right'>
                                 <Segment>
                                     <span>Номер заявки: {businessKey}</span><br />
@@ -36,13 +39,6 @@ export const LoanApproved = () => {
                         </GridRow>
                     </Grid>
                 </Segment>
-                <Grid>
-                    <GridRow columns='3'>
-                        <GridColumn></GridColumn>
-                        <GridColumn><h2>Пацан к успеху пришел!</h2></GridColumn>
-                        <GridColumn></GridColumn>
-                    </GridRow>
-                </Grid>
             </Container>
         </Segment>
     )

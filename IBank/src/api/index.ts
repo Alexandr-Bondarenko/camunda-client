@@ -47,10 +47,10 @@ export function loadAppState(instanceId: string): Promise<CamundaActiveInstanceR
     const config = {
         headers: { 'Access-Control-Allow-Origin': '*' }
     };
-    var url = urls.loadActiveTask + instanceId;
+    var url = `${process.env.REACT_APP_APIHOST_URL}${process.env.REACT_APP_APIHOST_LOAD_ACTIVE_TASK}`;
     return new Promise<CamundaActiveInstanceResponse>((resolve, reject) => {
 
-        axios.get(url, config)
+        axios.get(url + instanceId, config)
             .then(response => {
                 console.log('response', response);
                 resolve(response.data.data as CamundaActiveInstanceResponse);
@@ -82,9 +82,9 @@ export const useVariables = (instanceId: string): IModels => {
 
     const getVariables = (instanceId: string) => {
 
-        request(urls.loadVariables + instanceId)
+        var url = `${process.env.REACT_APP_APIHOST_URL}${process.env.REACT_APP_APIHOST_LOAD_VARIABLES}`;
+        request(url + instanceId)
             .then(response => {
-
                 console.log('response', response.data);
                 try {
                     var variables = JSON.parse(response.data);
@@ -122,12 +122,3 @@ export const RedirectTo = (url: string) => {
     a.href = url;
     a.click();
 }
-export const urls = {
-    startProcess: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_CAMUNDA_START_PROCESS_URL}`,
-    loadVariables: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_CAMUNDA_LOAD_VARIABLES_URL}`,
-    loadActiveTask: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_CAMUNDA_LOAD_ACTIVE_TASK_URL}`,
-    nextStep: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_CAMUNDA_NEXT_STEP_URL}`,
-    grafic: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_GRAFIC_URL}`,
-    clientInfo: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_CLIENT_INFO_URL}`,
-    programs: `${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_PROGRAMS_URL}`
-} 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Segment, Button } from 'semantic-ui-react'
 import { InfoContext } from '../forms/StartForm';
-import { request, RedirectTo, urls } from '../../api';
+import { request, RedirectTo } from '../../api';
 
 export const CompleteStartForm = () => {
 
@@ -23,8 +23,8 @@ export const CompleteStartForm = () => {
         const data = {
             variables: JSON.stringify(variables)
         }
-
-        request(urls.startProcess, data)
+        var url = `${process.env.REACT_APP_APIHOST_URL}${process.env.REACT_APP_APIHOST_START_PROCESS}`;
+        request(url, data)
             .then(response => {
                 console.log('response', response);
 

@@ -9,7 +9,7 @@ import {
     Container,
     Label
 } from 'semantic-ui-react'
-import { request, useVariables, urls } from '../../api'
+import { request, useVariables } from '../../api'
 import { ClientInfo, defaultClientInfo } from '../../models/ClientModels';
 import { CreditModel, defaultCreditModel } from '../../models/CreditModel';
 import { useParams } from 'react-router';
@@ -47,7 +47,8 @@ export const ClientData = () => {
 
     const searchClient = (iin: string) => {
 
-        request(urls.clientInfo + iin)
+        var url = `${process.env.REACT_APP_SERVICES_URL}${process.env.REACT_APP_SERVICES_CLIENT_INFO}`;
+        request(url + iin)
             .then((response) => {
                 if (response.code == 0 && response.data) {
                     setStateClientInfo(response.data);

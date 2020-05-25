@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Segment, Button } from 'semantic-ui-react'
 import { InfoContext } from './LoanData';
-import { request, RedirectTo, urls } from '../../api';
+import { request, RedirectTo } from '../../api';
 import { CreditModel } from '../../models/CreditModel';
 
 export const CompleteLoanData = () => {
@@ -26,7 +26,8 @@ export const CompleteLoanData = () => {
         }
         console.log('data', data);
 
-        request(urls.nextStep, data)
+        var url = `${process.env.REACT_APP_APIHOST_URL}${process.env.REACT_APP_APIHOST_NEXT_STEP}`;
+        request(url, data)
             .then(response => {
                 console.log('then', response);
 

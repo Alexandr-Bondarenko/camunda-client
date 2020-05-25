@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Grid, GridRow, GridColumn, Input, Segment, Dropdown, FormGroup, Label, Container, Button, Table, TableHeaderCell, TableRow, TableCell, TableFooter } from 'semantic-ui-react'
 import { CreditModel, defaultCreditModel } from '../../models/CreditModel'
-import { request, useVariables, urls } from '../../api'
+import { request, useVariables} from '../../api'
 import { useParams } from 'react-router'
 import { CompleteLoanData } from './CompleteLoanData'
 
@@ -38,7 +38,8 @@ export const LoanData = () => {
 
     const loadPrograms = () => {
 
-        request(urls.programs)
+        var url = `${process.env.REACT_APP_APIHOST_URL}${process.env.REACT_APP_APIHOST_PROGRAMS}`;
+        request(url)
             .then(response => {
                 setPrograms(response.data)
             })
@@ -57,7 +58,8 @@ export const LoanData = () => {
         }
         console.log(data);
 
-        request(`${process.env.REACT_APP_BASE_SERVICE_URL}${process.env.REACT_APP_GRAFIC_URL}`, data)
+        var url = `${process.env.REACT_APP_SERVICES_URL}${process.env.REACT_APP_SERVICES_GRAFIC}`
+        request(url, data)
             .then(response => {
                 setGrafic(response.data);
                 setCreditModel({ ...creditModel, loanInfo: { ...creditModel.loanInfo, grafic: response.data } })
