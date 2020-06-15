@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Segment, Button } from 'semantic-ui-react'
-import { InfoContext } from './ClientData';
+import { InfoContext } from '../forms/ClientData';
 import { request, RedirectTo } from '../../api';
 import { CreditModel } from '../../models/CreditModel';
 

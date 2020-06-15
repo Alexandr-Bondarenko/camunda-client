@@ -3,7 +3,7 @@ import { Grid, GridRow, GridColumn, Input, Segment, Dropdown, FormGroup, Label, 
 import { CreditModel, defaultCreditModel } from '../../models/CreditModel'
 import { request, useVariables} from '../../api'
 import { useParams } from 'react-router'
-import { CompleteLoanData } from './CompleteLoanData'
+import { CompleteLoanData } from '../components/CompleteLoanData'
 
 export const InfoContext = React.createContext({
 

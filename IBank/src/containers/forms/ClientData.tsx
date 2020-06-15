@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {
     Button,
     Segment,
@@ -13,8 +13,7 @@ import { request, useVariables } from '../../api'
 import { ClientInfo, defaultClientInfo } from '../../models/ClientModels';
 import { CreditModel, defaultCreditModel } from '../../models/CreditModel';
 import { useParams } from 'react-router';
-import { CompleteStartForm } from './CompleteStartForm';
-import { CompleteClientData } from './CompleteClientData';
+import { CompleteClientData } from '../components/CompleteClientData';
 
 export const InfoContext = React.createContext({
 
@@ -34,6 +33,8 @@ export const ClientData = () => {
     const { processInfo, clientInfo, setClientInfo } = useVariables(String(processInstanceId));
     const [iin, setIin] = useState('');
     const [stateClientInfo, setStateClientInfo] = useState<ClientInfo>(clientInfo);
+    const [counter, setCounter] = useState(0);
+
 
     const defaultContext = {
         processDefinitionId: String(processDefinitionId),
@@ -42,7 +43,8 @@ export const ClientData = () => {
         clientInfo: stateClientInfo
     }
 
-
+    console.log('123');
+    
 
 
     const searchClient = (iin: string) => {
@@ -52,6 +54,7 @@ export const ClientData = () => {
             .then((response) => {
                 if (response.code == 0 && response.data) {
                     setStateClientInfo(response.data);
+                    setCounter(counter + 1);
                 }
                 else {
                     setStateClientInfo({ ...defaultClientInfo })
@@ -92,6 +95,9 @@ export const ClientData = () => {
                                 stateClientInfo.iin && <>
                                     <GridRow columns='2'>
                                         <GridColumn>
+                                            <Label>Counter: {counter}</Label>
+                                        </GridColumn>
+                                        <GridColumn>
                                             <Input label='ИИН' value={stateClientInfo.iin} />
                                         </GridColumn>
                                     </GridRow>
@@ -126,7 +132,7 @@ export const ClientData = () => {
                                         </GridColumn>
                                     </GridRow>
                                 </>
-                            }
+                            }                            
                         </Grid>
                         <CompleteClientData />
                     </Segment>

@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Root from './containers/Root'
-import {config} from 'dotenv'
+import { Login } from './containers/forms/Login'
 
 const App = () => {
 
-  config();
+  //config();
+  const [authSuccess, setAuthSucces] = useState(false);
 
-  return (
-    <div >
-      <Root/>
-    </div>
+  return (<>
+    {!authSuccess &&
+      <Login setAuth={setAuthSucces}/>
+    }
+    {authSuccess &&
+      <Root />
+    }
+  </>
   );
 }
 
